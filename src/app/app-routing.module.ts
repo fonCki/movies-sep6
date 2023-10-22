@@ -11,10 +11,11 @@ import { ActorDetailsComponent } from './components/actor-details/actor-details.
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'movies', component: MovieListComponent },
-  { path: 'movies/:id', component: MovieDetailComponent },
+  { path: 'movie/:id', component: MovieDetailComponent },
   { path: 'actors/:id', component: ActorDetailsComponent }
 ];
 

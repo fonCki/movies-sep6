@@ -17,6 +17,7 @@ export class LoginComponent {
 
   login(): void {
     if (this.authService.login(this.email, this.password)) {
+      console.log('Login successful');
       // Navigate to home page if login is successful
       this.router.navigate(['/home']);
     } else {

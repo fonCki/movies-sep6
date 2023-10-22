@@ -1,21 +1,25 @@
-<div class="movie-detail-container">
-  <div class="movie-background" [style.backgroundImage]="'url(https://c8.alamy.com/comp/B6FK9F/abstract-horror-movie-feature-reel-as-background-B6FK9F.jpg)'"></div>
+<!-- Main container for movie details -->
+<div class="movie-details-container" *ngIf="movie">
+    <!-- Use backdrop_path for background image. It's generally wider and can be used for backgrounds. -->
+    <div class="background-test"></div>
   
-  <div class="movie-content">
-      <div class="movie-header">
-          <img [src]="'https://media.istockphoto.com/id/905168950/vector/creative-poster-design-for-thriller-movie-show.jpg?s=1024x1024&w=is&k=20&c=44AKrzbj5r3E6Gt94DOsGvckaIbGyeFIbKMhqOCG03E='" alt="{{ movie.name }} Poster" class="movie-poster">
-          <div>
-              <h1 class="movie-title">{{ movie.name }}</h1>
-              <p class="movie-rating">Rating: {{ movie.rating }}</p>
-              <p class="movie-description">{{ movie.description }}</p>
-          </div>
+    <section class="main-details">
+      <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}">
+      <div class="text-details">
+        <h1>{{ movie.title }}</h1>
+        <p>{{ movie.overview }}</p>
+        <p><strong>Release Date:</strong> {{ movie.release_date }}</p>
+        <p><strong>Rating:</strong> {{ movie.vote_average }} / 10</p>
       </div>
-      
-      <div class="actors-section">
-          <h2>Actors</h2>
-          <div class="actor-card" *ngFor="let actor of movie.actors">
-              <p>{{ actor }}</p>
-          </div>
+    </section>
+  
+    <!-- Actor cards section -->
+    <section class="actors-grid">
+      <div class="actor-card" *ngFor="let actor of actors">
+        <img [src]="'https://image.tmdb.org/t/p/w200' + actor.profile_path" alt="{{ actor.name }}">
+        <h3>{{ actor.name }}</h3>
       </div>
+    </section>
   </div>
-</div>
+  
+  

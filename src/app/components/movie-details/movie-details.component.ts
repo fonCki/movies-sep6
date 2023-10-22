@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { TmdbService } from '../../services/tmdb.service';  // Import your TMDB Service
 
 @Component({
   selector: 'app-movie-detail',
@@ -8,37 +8,51 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./movie-details.component.css']
 })
 export class MovieDetailComponent implements OnInit {
-  
-  movies: any[] = [];
-  movieName: string | null = null;
+
+  movieId: number | null = null;
   movie: any = null;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) { }
+  backgroundImageUrl: string | null = null;
+
+  constructor(private route: ActivatedRoute, private tmdbService: TmdbService) { }  // Use TmdbService instead of HttpClient
 
   ngOnInit(): void {
-    // Fetch the movie name from the route
-    this.movieName = this.route.snapshot.paramMap.get('name');
-    
-    if (this.movieName) {
-      this.fetchMovies();
+    // Fetch the movie ID from the route
+    const id = this.route.snapshot.paramMap.get('id');
+    console.log('Movie ID: ', id);
+    this.movieId = id ? +id : null;
+
+    if (this.movieId) {
+      this.fetchMovieDetail();
     } else {
-      console.error('Movie name not provided in the route!');
+      console.error('Movie ID not provided in the route!');
     }
   }
 
-  fetchMovies(): void {
-    this.http.get<any[]>('assets/sample-movies.json').subscribe(
-      (data: any[]) => {
-        this.movies = data;
-        // Find the specific movie based on the movie name
-        this.movie = this.movies.find(m => m.name === this.movieName);
-        if (!this.movie) {
-          console.error('Movie not found!');
-        }
-      },
-      (error) => {
-        console.error('There was an error fetching the movie data!', error);
-      }
-    );
-  }
+actors: any[] = [];
+
+fetchMovieDetail(): void {
+
+  this.tmdbService.getMovieDetails(this.movieId as number).subscribe(
+    data => {
+      this.movie = data;
+      this.fetchMovieCast();
+      this.backgroundImageUrl = 'https://image.tmdb.org/t/p/original' + this.movie.backdrop_path;
+    },
+    error => {
+      console.error('There was an error fetching the movie details!', error);
+    }
+  );
+}
+
+fetchMovieCast(): void {
+  this.tmdbService.getMovieCast(this.movieId as number).subscribe(
+    data => {
+      this.actors = data.cast;
+    },
+    error => {
+      console.error('There was an error fetching the movie cast!', error);
+    }
+  );
+}
 }
