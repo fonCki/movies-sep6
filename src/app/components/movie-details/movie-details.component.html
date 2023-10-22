@@ -1,0 +1,21 @@
+<div class="movie-detail-container">
+  <div class="movie-background" [style.backgroundImage]="'url(https://c8.alamy.com/comp/B6FK9F/abstract-horror-movie-feature-reel-as-background-B6FK9F.jpg)'"></div>
+  
+  <div class="movie-content">
+      <div class="movie-header">
+          <img [src]="'https://media.istockphoto.com/id/905168950/vector/creative-poster-design-for-thriller-movie-show.jpg?s=1024x1024&w=is&k=20&c=44AKrzbj5r3E6Gt94DOsGvckaIbGyeFIbKMhqOCG03E='" alt="{{ movie.name }} Poster" class="movie-poster">
+          <div>
+              <h1 class="movie-title">{{ movie.name }}</h1>
+              <p class="movie-rating">Rating: {{ movie.rating }}</p>
+              <p class="movie-description">{{ movie.description }}</p>
+          </div>
+      </div>
+      
+      <div class="actors-section">
+          <h2>Actors</h2>
+          <div class="actor-card" *ngFor="let actor of movie.actors">
+              <p>{{ actor }}</p>
+          </div>
+      </div>
+  </div>
+</div>

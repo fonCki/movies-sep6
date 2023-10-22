@@ -1,0 +1,67 @@
+.movie-detail-container {
+  font-family: 'Arial', sans-serif;
+  position: relative;
+  color: white;
+}
+
+.movie-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60vh;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(50%);
+  z-index: -1;
+}
+
+.movie-content {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 20px;
+}
+
+.movie-header {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.movie-poster {
+  width: 200px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.movie-title {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+}
+
+.movie-rating {
+  background-color: #E50914;
+  display: inline-block;
+  padding: 5px 15px;
+  border-radius: 3px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.movie-description {
+  font-size: 1.2em;
+}
+
+.actors-section {
+  margin-top: 30px;
+}
+
+.actor-card {
+  display: inline-block;
+  margin-right: 20px;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 5px 10px;
+  border-radius: 5px;
+}

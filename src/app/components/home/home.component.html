@@ -1,0 +1,21 @@
+<div class="home-container">
+    <section class="search-section">
+      <input type="text" placeholder="Search movies..." class="search-bar">
+      <select class="sort-by">
+        <option value="latest">Latest</option>
+        <option value="popular">Most Popular</option>
+        <option value="rating">Highest Rated</option>
+      </select>
+      <button class="filter-button">Filter</button>
+    </section>
+  
+    <section class="movies-section">
+      <div class="movie" *ngFor="let movie of movies">
+        <a [routerLink]="['/movie', movie.name]"> 
+        <img [src]="movie.imageUrl" alt="{{ movie.name }}">
+        <h4 class="movie-title">{{ movie.name }}</h4>
+        </a> 
+      </div>
+    </section>
+  </div>
+  
