@@ -25,5 +25,8 @@ export class TmdbService {
     return this.http.get(`${BASE_URL}/movie/${movieId}/credits?api_key=${API_KEY}`);
   }
   
-  // ... add more methods as needed.
+  getMovieGenres(): Observable<any> {
+    return this.http.get(`${BASE_URL}/genre/movie/list?api_key=${API_KEY}`);
+}
+
 }

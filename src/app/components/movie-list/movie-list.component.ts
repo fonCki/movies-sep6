@@ -8,6 +8,8 @@ import { TmdbService } from '../../services/tmdb.service';
 })
 export class MovieListComponent implements OnInit {
 
+  @Input() genre: number | null = null; 
+  @Input() sortBy: string = 'latest';
   @Input() filterFavorites: boolean = false;  // <- Define the @Input() property
 
   movies: any[] = [];
