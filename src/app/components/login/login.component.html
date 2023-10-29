@@ -1,5 +1,20 @@
 <div class="login-container">
     <h2>Login</h2>
+
+    <!-- Social Media Logins -->
+    <button (click)="signInWithGoogle()" class="social-btn google-btn">
+        <i class="fa fa-google"></i> Login with Google
+    </button>
+    <button (click)="signInWithFacebook()" class="social-btn facebook-btn">
+        <i class="fa fa-facebook"></i> Login with Facebook
+    </button>
+    <button (click)="signInWithTwitter()" class="social-btn twitter-btn">
+        <i class="fa fa-twitter"></i> Login with Twitter
+    </button>
+    <div class="divider">
+        <span>OR</span>
+    </div>
+    <!-- Email and Password Login -->
     <form>
         <div class="input-group">
             <label for="email">Email Address:</label>
@@ -12,7 +27,7 @@
         <div class="forgot-password">
             <a href="#">Forgot password?</a>
         </div>
-        <button (click)="login()">Login</button>
+        <button (click)="loginWithEmail()">Login</button>
     </form>
     <div class="signup-section">
         <p>Don't have an account? <a href="#" class="signup-link">Sign up</a></p>

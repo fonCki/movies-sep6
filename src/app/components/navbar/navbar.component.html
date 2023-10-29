@@ -1,15 +1,24 @@
 <nav class="navbar">
     <div class="navbar-container">
       <a href="#" class="logo">
-        <img src="https://via.placeholder.com/100x50?text=Logo" alt="Company Logo">
+        <!-- put a button and call authService.getUser -->
+        <button (click)="authService.signOut">Get User</button>
+        <img src="https://via.placeholder.com/100x50?text=Logo" alt="Company Logo" >
       </a>
       <div class="nav-items">
         <div class="user-initials" *ngIf="authService.isLogged">{{ userInitials }}</div>
-        <a class="nav-item" *ngIf="authService.isLogged" (click)="authService.logout()">Logoff</a>
+        <a class="nav-item" (click)="authService.signOut">Logoff</a>
     
         <!-- If user is NOT logged in -->
-        <a class="nav-item" *ngIf="!authService.isLogged" routerLink="/login">Login</a>
-        <a class="nav-item" *ngIf="!authService.isLogged" routerLink="/signup">Signup</a>
+        <a class="nav-item" routerLink="/login">Login</a>
+        <a class="nav-item" routerLink="/signup">Signup</a>
+
+        <!-- <a class="nav-item" *ngIf="!authService.isLogged" (click)="authService.signOut">Logoff</a>
+    
+        <!-- If user is NOT logged in -->
+        <!-- <a class="nav-item" *ngIf="authService.isLogged" routerLink="/login">Login</a> -->
+        <!-- <a class="nav-item" *ngIf="authService.isLogged" routerLink="/signup">Signup</a> --> 
+
       </div>
     </div>
   </nav>

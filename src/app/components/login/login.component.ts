@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router'; // Import Router
+import { Router } from '@angular/router'; 
 
 @Component({
   selector: 'app-login',
@@ -8,20 +8,49 @@ import { Router } from '@angular/router'; // Import Router
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  email: string = ''; // Initialize the property to an empty string
-  password: string = ''; // Initialize the property to an empty string
+  email: string = ''; 
+  password: string = ''; 
   constructor(
     private authService: AuthService,
-    private router: Router // Inject Router
-    ) { }
+    private router: Router 
+  ) {}
 
-  login(): void {
-    if (this.authService.login(this.email, this.password)) {
-      console.log('Login successful');
-      // Navigate to home page if login is successful
+  async signInWithGoogle() {
+    try {
+      await this.authService.signInWithGoogle();
       this.router.navigate(['/home']);
-    } else {
-      alert('Invalid credentials');
+    } catch (error) {
+      console.log(error);
+      alert('Error with Google sign-in: ' + (error as any).message);
     }
   }
+
+  async signInWithFacebook() {
+    try {
+      await this.authService.signInWithFacebook();
+      this.router.navigate(['/home']);
+    } catch (error) {
+      alert('Error with Facebook sign-in: ' + (error as any).message);
+    }
+  }
+
+  async loginWithEmail() {
+    try {
+      await this.authService.loginWithEmail(this.email, this.password);
+      this.router.navigate(['/home']);
+    } catch (error) {
+      alert('Error with email login: ' + (error as any).message);
+    }
+  }
+
+
+  async signInWithTwitter() {
+    try {
+      await this.authService.signInWithTwitter();
+      this.router.navigate(['/home']);
+    } catch (error) {
+      alert('Error with Twitter sign-in: ' + (error as any).message);
+    }
+  }
+  
 }

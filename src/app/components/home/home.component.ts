@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { TmdbService } from '../../services/tmdb.service';  // Import your TMDB Service
+// home.component.ts
 
+import { Component, OnInit } from '@angular/core';
+import { TmdbService } from '../../services/tmdb.service';  
 
 @Component({
   selector: 'app-home',
@@ -12,31 +13,49 @@ export class HomeComponent implements OnInit {
   genres: any[] = [];
   selectedGenre: number | null = null;
   selectedSortBy: string = 'latest';
-  
+  movies: any[] = [];
+
   constructor(private tmdbService: TmdbService) { }
 
   ngOnInit(): void {
     this.fetchGenres();
+    this.fetchMovies();
   }
 
   fetchGenres(): void {
-    this.tmdbService.getMovieGenres().subscribe(
-      data => {
-        this.genres = data.genres;
-      },
-      error => {
-        console.error('There was an error fetching the genres!', error);
-      }
+    this.tmdbService.getMovieGenres().subscribe({
+       next: data => {
+         this.genres = data.genres;
+      
+    }
+  }
     );
   }
 
   filterMovies(): void {
-    // Here, you can do additional actions if required when the filter button is clicked.
-    // For instance, if you're storing movies in a list in this component, 
-    // you might want to clear it or fetch the filtered movies directly here.
+    // Call service to fetch movies based on filter criteria
+    console.log('Filtering movies by genre: ', this.selectedGenre, ' and sort by: ', this.selectedSortBy);
+    this.tmdbService.getFilteredMovies(this.selectedGenre, this.selectedSortBy).subscribe({
+      next: data => {
+        this.movies = data.results || [];
+        console.log('Filtered movies: ', this.movies);
+      },
+      error: error => {
+        console.error('There was an error fetching the filtered movie data!', error);
+      }
+    });
+  }
 
-    // If you're using a child component to display the movies,
-    // it will receive the updated selectedGenre and selectedSortBy properties, and can react accordingly.
+  fetchMovies(): void {
+    // Use the filterFavorites property somehow when fetching movies...
+    this.tmdbService.getPopularMovies().subscribe({
+      next: data => {
+        this.movies = data.results || [];
+      },
+      error: error => {
+        console.error('There was an error fetching the movie data!', error);
+      }
+    });
+    
   }
 }
-

@@ -1,37 +1,19 @@
-import { Component, OnInit, Input } from '@angular/core';  // <- Import Input
-import { TmdbService } from '../../services/tmdb.service';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-movie-list',
   templateUrl: './movie-list.component.html',
   styleUrls: ['./movie-list.component.css']
 })
-export class MovieListComponent implements OnInit {
+export class MovieListComponent {
 
-  @Input() genre: number | null = null; 
+  @Input() genre: number | null = null;
   @Input() sortBy: string = 'latest';
-  @Input() filterFavorites: boolean = false;  // <- Define the @Input() property
+  @Input() movies: any[] = [];
 
-  movies: any[] = [];
-
-  constructor(private tmdbService: TmdbService) { }
-
-  ngOnInit(): void {
-    this.fetchMovies();
-  }
-
-  fetchMovies(): void {
-    // Use the filterFavorites property somehow when fetching movies...
-    this.tmdbService.getPopularMovies().subscribe(
-      data => {
-        console.log('Popular Movies: ', data);
-        this.movies = data.results;
-      },
-      error => {
-        console.error('There was an error fetching the movie data!', error);
-      }
-    );
+  onInit(): void {
+    console.log('Genre: ', this.genre);
+    console.log('Sort by: ', this.sortBy);
+    console.log('Movies: ', this.movies);
   }
 }
-
-

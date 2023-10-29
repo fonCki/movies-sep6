@@ -13,6 +13,10 @@ import { ActorDetailsComponent } from './components/actor-details/actor-details.
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { environment } from '../environments/environments';
+
 
 const routes: Routes = [
   { path: 'movie/:name', component: MovieDetailComponent },
@@ -32,10 +36,12 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    RouterModule.forRoot(routes)],
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

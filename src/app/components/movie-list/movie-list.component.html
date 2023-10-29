@@ -1,9 +1,22 @@
-<section class="movies-section">
-    <div class="movie" *ngFor="let movie of movies">
-      <a [routerLink]="['/movie', movie.id]">
-      <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}">
-      <h4 class="movie-title">{{ movie.title }}</h4>
+<div class="movie-row">
+  <div *ngFor="let movie of movies">
+    <!-- Main container for movie details -->
+    <div class="movie-details-container">
+      <!-- Main movie details section -->
+      <a [routerLink]="['/movie', movie.id]" class="main-details">
+        <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}">
+        <div class="text-details">
+          <h1>{{ movie.title }}</h1>
+        </div>
       </a>
+
+      <!-- Actor's section (hidden for now) -->
+      <section class="actors-grid" *ngIf="movie.actors">
+        <div class="actor-card" *ngFor="let actor of movie.actors">
+          <img [src]="'https://image.tmdb.org/t/p/w200' + actor.profile_path" alt="{{ actor.name }}">
+          <h3>{{ actor.name }}</h3>
+        </div>
+      </section>
     </div>
-  </section>
-  
+  </div>
+</div>
