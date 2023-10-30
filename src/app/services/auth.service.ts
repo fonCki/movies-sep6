@@ -1,17 +1,30 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import * as firebase from 'firebase';
+import firebase from 'firebase/compat/app';
 import { UserService } from './user.service'; // Import UserService
+import { BehaviorSubject } from 'rxjs';
+
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+  private currentUserSubject = new BehaviorSubject<firebase.User | null>(null);
+  public user = this.currentUserSubject.asObservable();
+
   constructor(
     private afAuth: AngularFireAuth, 
     private userService: UserService  // Inject UserService
-  ) {}
+  ) {     
+    this.afAuth.authState.subscribe(user => {
+    this.currentUserSubject.next(user);});
+  }
+
+  getCurrentUser(): firebase.User | null {
+    return this.currentUserSubject.value;
+  }
 
   async signInWithGoogle() {
     const credential = await this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
@@ -53,10 +66,15 @@ export class AuthService {
     return credential;
   }
 
-  async signOut() {
-    console.log('signing out');
-    return this.afAuth.signOut();
+  async getUser() {
+    return this.afAuth.currentUser;
   }
+
+  signOut(): void {
+    console.log('signing out');
+    this.afAuth.signOut();
+  }
+  
 
   async isLogged() {
     return this.afAuth.authState;
