@@ -106,15 +106,35 @@ button:hover {
 .divider {
     display: flex;
     align-items: center;
-    text-align: center;
+    justify-content: center; /* Center align horizontally */
     margin-bottom: 15px;
+    position: relative;      /* Add relative positioning */
+}
+
+.divider:before,
+.divider:after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background-color: #e2e2e2;
+}
+
+.divider:before {
+    margin-right: 10px;      /* Space before the "OR" */
+}
+
+.divider:after {
+    margin-left: 10px;       /* Space after the "OR" */
 }
 
 .divider span {
-    background-color: #fff;
     padding: 0 10px;
     color: #888;
+    background-color: #ffffff;  /* Set a background color to ensure the lines don't show behind the text */
+    z-index: 1;                  /* Place the text above the lines */
+    position: relative;          /* Adjust positioning context */
 }
+
 
 /* ... your existing styles ... */
 

@@ -1,5 +1,5 @@
 .signup-container {
-    font-family: 'Arial', sans-serif; /* Same font as your other components */
+    font-family: 'Arial', sans-serif;
     max-width: 400px;
     margin: 40px auto;
     padding: 20px;
@@ -25,12 +25,22 @@ label {
 }
 
 input {
-    width: 100%;
+    width: 93%; /* Adjusting from 95% to 100% for consistency */
     padding: 10px;
     border: 1px solid #e2e2e2;
     border-radius: 4px;
     font-size: 16px;
-    text-align: center; /* Center-aligning the input text */
+    text-align: left; /* Adjusting from center to left for better form usability */
+}
+
+.error-message {
+    background-color: #ffdddd; /* Light red background */
+    color: #e74c3c; /* Red text color */
+    border: 1px solid #e74c3c; /* Red border */
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 15px; /* Some space before the form starts */
+    text-align: center;
 }
 
 button {
@@ -56,4 +66,9 @@ button:hover {
 
 .login-link {
     font-weight: bold;
+    color: #007bff;
+}
+
+.login-link:hover {
+    text-decoration: underline;
 }

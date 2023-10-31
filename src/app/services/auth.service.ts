@@ -28,13 +28,16 @@ export class AuthService {
 
   async signInWithGoogle() {
     const credential = await this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-    
+    if (credential.user) { // Check if user is non-null
+      await this.updateUserData(credential.user);
+    }
+    return credential;
   }
   
   async signInWithFacebook() {
     const credential = await this.afAuth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
     if (credential.user) { // Check if user is non-null
-      // await this.updateUserData(credential.user);
+      await this.updateUserData(credential.user);
     }
     return credential;
   }
@@ -50,10 +53,13 @@ export class AuthService {
   }
   
 
-  async signUpWithEmail(email: string, password: string) {
+  //create user with email, password, name, and photo
+  async signUpWithEmail(email: string, password: string, name: string, lastName: string) {
     const credential = await this.afAuth.createUserWithEmailAndPassword(email, password);
     if (credential.user) { // Check if user is non-null
-      // await this.updateUserData(credential.user);
+      await this.updateUserData(credential.user);
+      //update user profile with name and last name
+      await this.updateName(name, lastName);
     }
     return credential;
   }
@@ -61,9 +67,20 @@ export class AuthService {
   async loginWithEmail(email: string, password: string) {
     const credential = await this.afAuth.signInWithEmailAndPassword(email, password);
     if (credential.user) { // Check if user is non-null
-      // await this.updateUserData(credential.user);
+      await this.updateUserData(credential.user);
     }
     return credential;
+  }
+
+  async updateName(name: string, lastName: string) {
+    const user = await this.afAuth.currentUser;
+    if (user) { // Check if user is non-null
+      //update user profile with name and last name
+      console.log('updating name');
+      await user.updateProfile({
+        displayName: name + ' ' + lastName,
+      });
+    }
   }
 
   async getUser() {
