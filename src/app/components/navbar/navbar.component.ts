@@ -16,7 +16,6 @@ export class NavbarComponent {
   constructor(public authService: AuthService) {
     this.authService.user.subscribe(user => {
       this.isLoggedIn = !!user;
-      console.log('User: ', user);
       if (user) {
         this.userPhoto = user.photoURL;
       }
@@ -26,7 +25,8 @@ export class NavbarComponent {
   get userInitials(): string {
     const user = this.authService.getCurrentUser();
     if (user) {
-      return (user.displayName || '').split(' ').map(name => name[0]).join('');
+      // Split the user's name into initials and return them in capital letters
+      return user.displayName?.split(' ').map(name => name[0].toUpperCase()).join('') || '';
     }
     return '';
   }

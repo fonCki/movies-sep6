@@ -55,11 +55,10 @@ export class SignupComponent {
   }
 
   async handleFirebaseSignup() {
-    // connect to auth.service.ts and connect by email
     try {
       await this.authService.signUpWithEmail(this.email, this.password, this.firstName, this.lastName);
     } catch (error) {
-      console.log(error);
+      this.errorMessage = (error as any).message;
     }
   }
 }
