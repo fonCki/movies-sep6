@@ -39,15 +39,21 @@ export class AuthService {
   
   async signInWithFacebook() {
     const credential = await this.afAuth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
-
     return credential;
   }
   
-
-
   async signInWithTwitter() {
     const credential = await this.afAuth.signInWithPopup(new firebase.auth.TwitterAuthProvider());
+    return credential;
+  }
 
+  async signInWithGithub() {
+    const credential = await this.afAuth.signInWithPopup(new firebase.auth.GithubAuthProvider());
+    return credential;
+  }
+
+  async signInWithLinkedIn() {
+    const credential = await this.afAuth.signInWithPopup(new firebase.auth.OAuthProvider('linkedin.com'));
     return credential;
   }
   

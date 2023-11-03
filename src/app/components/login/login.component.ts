@@ -34,6 +34,24 @@ export class LoginComponent {
     }
   }
 
+  async signInWithGithub() {
+    try {
+      await this.authService.signInWithGithub();
+      this.router.navigate(['/home']);
+    } catch (error) {
+      alert('Error with Github sign-in: ' + (error as any).message);
+    }
+  }
+
+  async signInWithLinkedin() {
+    try {
+      await this.authService.signInWithLinkedIn();
+      this.router.navigate(['/home']);
+    } catch (error) {
+      alert('Error with LinkedIn sign-in: ' + (error as any).message);
+    }
+  }
+
   async loginWithEmail() {
     try {
       await this.authService.loginWithEmail(this.email, this.password);
