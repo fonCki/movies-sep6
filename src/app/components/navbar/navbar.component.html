@@ -3,9 +3,12 @@
     <a href="#">
       <img class="logo-app" src="./assets/images/logos/blockbuster-video-logo-black-and-white.png" alt="Company Logo" >
     </a>
+    <div *ngIf="showMiddleNav">
+      <app-navbar-middle></app-navbar-middle>
+    </div>
     <div class="nav-items">
       <!-- Nav Bar Middle -->
-      <app-navbar-middle></app-navbar-middle>
+
       <!-- Search Bar -->
       <app-search-bar></app-search-bar>
 
