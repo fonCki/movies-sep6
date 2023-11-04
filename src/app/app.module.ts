@@ -20,6 +20,17 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { DropdownMenuComponent } from './components/dropdown-menu/dropdown-menu.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatIconModule} from "@angular/material/icon";
+import {MatMenuModule} from "@angular/material/menu";
+import {MatDividerModule} from "@angular/material/divider";
+import { NotificationComponent } from './components/notification/notification.component';
+
+
+
+import { MatBadgeModule } from '@angular/material/badge'; // <-- Import this
+import { MatButtonModule } from '@angular/material/button';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { NavbarMiddleComponent } from './components/navbar-middle/navbar-middle.component'; // <-- Make sure this is imported
 
 
 const routes: Routes = [
@@ -37,7 +48,10 @@ const routes: Routes = [
     MovieListComponent,
     MovieDetailComponent,
     ActorDetailsComponent,
-    DropdownMenuComponent
+    DropdownMenuComponent,
+    NotificationComponent,
+    SearchBarComponent,
+    NavbarMiddleComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +62,12 @@ const routes: Routes = [
     FormsModule,
     MatSelectModule,
     BrowserAnimationsModule,
+    MatIconModule,
+    MatMenuModule,
+    MatDividerModule,
+    MatBadgeModule,
+    MatButtonModule,
+    MatSlideToggleModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,11 +1,5 @@
-import { Component } from '@angular/core';
-
-export interface Food {
-  value: string;
-  viewValue: string;
-  img: string;
-}
-
+import { Component, Input } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-dropdown-menu',
@@ -13,6 +7,12 @@ export interface Food {
   styleUrls: ['./dropdown-menu.component.css']
 })
 export class DropdownMenuComponent {
-  hideImage = false;
-  yourImagePath = 'path-to-your-image.jpg';
+  @Input() userPhoto: string | null = null;
+  @Input() userInitials: string = '';
+
+  constructor(public authService: AuthService) {}
+
+  signOut(): void {
+    this.authService.signOut();
+  }
 }
