@@ -16,6 +16,7 @@
 
     <button class="filter-button" (click)="filterMovies()">Filter</button>
   </section>
+  <app-dropdown-menu></app-dropdown-menu>
 
   <app-movie-list [genre]="selectedGenre" [sortBy]="selectedSortBy" [movies]="movies"></app-movie-list>
 </div>

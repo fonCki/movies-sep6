@@ -16,6 +16,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { environment } from '../environments/environments';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSelectModule } from '@angular/material/select';
+import { DropdownMenuComponent } from './components/dropdown-menu/dropdown-menu.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 const routes: Routes = [
@@ -32,7 +36,8 @@ const routes: Routes = [
     SignupComponent,
     MovieListComponent,
     MovieDetailComponent,
-    ActorDetailsComponent
+    ActorDetailsComponent,
+    DropdownMenuComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +46,8 @@ const routes: Routes = [
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
+    MatSelectModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
