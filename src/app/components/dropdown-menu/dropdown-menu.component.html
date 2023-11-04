@@ -1,0 +1,9 @@
+
+<mat-form-field class="image-placeholder-form-field">
+    <mat-select placeholder="" (focus)="hideImage = true" (blur)="hideImage = true">
+        <mat-option (click)="hideImage = true" *ngFor="let number of ['One', 'Two', 'Three', 'Four', 'Five']" [value]="number">
+            {{ number }}
+        </mat-option>
+    </mat-select>
+    <img *ngIf="!hideImage" [src]="yourImagePath" class="select-image-placeholder"/>
+</mat-form-field>

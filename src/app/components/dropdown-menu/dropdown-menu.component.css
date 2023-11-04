@@ -1,0 +1,12 @@
+.image-placeholder-form-field {
+    position: relative;
+  }
+  
+  .select-image-placeholder {
+    position: absolute;
+    left: 1em; /* Adjust the value to properly align the image */
+    top: 50%;
+    transform: translateY(-50%);
+    height: 1em; /* Adjust based on your image size */
+  }
+  
