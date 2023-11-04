@@ -36,6 +36,7 @@ fetchMovieDetail(): void {
   this.tmdbService.getMovieDetails(this.movieId as number).subscribe(
     data => {
       this.movie = data;
+      console.log('Movie Details: ', this.movie);
       this.fetchMovieCast();
       this.backgroundImageUrl = 'https://image.tmdb.org/t/p/original' + this.movie.backdrop_path;
     },

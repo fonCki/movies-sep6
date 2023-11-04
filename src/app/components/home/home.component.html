@@ -1,23 +1,5 @@
 <div class="home-container">
-  <section class="search-section">
-    <input type="text" placeholder="Search movies..." class="search-bar">
 
-    <!-- Dropdown for genre selection -->
-    <select [(ngModel)]="selectedGenre" class="filter-genre">
-      <option *ngFor="let genre of genres" [value]="genre.id">{{ genre.name }}</option>
-    </select>
-
-    <!-- Dropdown for sorting -->
-    <select [(ngModel)]="selectedSortBy" class="sort-by">
-      <option value="latest">Latest</option>
-      <option value="popular">Most Popular</option>
-      <option value="rating">Highest Rated</option>
-    </select>
-
-    <button class="filter-button" (click)="filterMovies()">Filter</button>
-  </section>
-  <app-dropdown-menu></app-dropdown-menu>
-
-  <app-movie-list [genre]="selectedGenre" [sortBy]="selectedSortBy" [movies]="movies"></app-movie-list>
+  <app-movie-list ></app-movie-list>
 </div>
 

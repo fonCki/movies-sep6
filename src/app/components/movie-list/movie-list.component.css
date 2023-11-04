@@ -1,3 +1,4 @@
+
 body {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   background-color: #141414;
@@ -6,8 +7,17 @@ body {
   padding: 0;
 }
 
+.movie-list {
+  padding: 0;
+  margin: 0;
+  background-color: #141414;
+  height: 100%;
+  width: 100%;
+}
+
 .movie-row {
   display: grid;
+  background-color: #141414;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adjust this for desired poster width */
   gap: 20px;
   padding: 20px;
@@ -57,6 +67,8 @@ body {
 
 .movie-details-container {
   position: relative; /* Needed for absolute positioning of the title inside */
+  background-color: #141414;
+
   /* ... Other styles ... */
 }
 
@@ -74,4 +86,85 @@ body {
   margin: 0;
   font-size: 1.1em;
   font-weight: bold;
+}
+
+.featured-movie-container {
+
+  position: relative; /* This ensures the absolute positioning is relative to this container */
+  width: 100%; /* The container will take the full width */
+  height: 80vh; /* This will make the height of the container equal to the height of the viewport */
+  overflow: hidden; /* This will prevent any overflow from the container */
+}
+
+.featured-movie {
+  display: block; /* This will allow you to set width and height */
+  width: 100%; /* The link will take the full width */
+  height: 100%; /* The link will take the full height */
+  text-decoration: none; /* This removes the underline from the link */
+}
+
+.featured-movie-background {
+  width: 100%;
+  height: 100%;
+  background-size: cover; /* This will make sure the background covers the full area */
+  background-position: center; /* This will center the background image */
+  display: flex; /* Using flex to align the title */
+  align-items: flex-end; /* This aligns the title at the bottom */
+  justify-content: center; /* This centers the title horizontally */
+}
+
+.featured-movie-title {
+  color: white; /* Assuming you want the title in white */
+  text-align: center; /* This will center the title text */
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for the title */
+  padding: 20px; /* Padding around the text */
+  width: 100%; /* Full width to ensure the background spans across */
+  box-sizing: border-box; /* This ensures the padding is included in the width */
+}
+
+.featured-movie-title h1 {
+  text-align: justify-all;
+  color: white; /* Assuming you want the title in white */
+  margin: 0; /* Removes the default margin from the h1 */
+  font-size: 3rem; /* Adjust the font size to your preference */
+}
+
+featured-title {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.featured-ranking {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.featured-description {
+  text-align: justify;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  max-width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.featured-buttons {
+  /* Additional styling for buttons */
+}
+
+.btn {
+  padding: 10px 20px;
+  margin-right: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-play {
+  background-color: #e50914;
+  color: white;
+}
+
+.btn-info {
+  background-color: rgba(109, 109, 110, 0.7);
+  color: white;
 }

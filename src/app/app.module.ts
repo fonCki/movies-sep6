@@ -30,7 +30,8 @@ import { NotificationComponent } from './components/notification/notification.co
 import { MatBadgeModule } from '@angular/material/badge'; // <-- Import this
 import { MatButtonModule } from '@angular/material/button';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
-import { NavbarMiddleComponent } from './components/navbar-middle/navbar-middle.component'; // <-- Make sure this is imported
+import { NavbarMiddleComponent } from './components/navbar-middle/navbar-middle.component';
+import { SeriesListComponent } from './components/series-list/series-list.component'; // <-- Make sure this is imported
 
 
 const routes: Routes = [
@@ -51,7 +52,8 @@ const routes: Routes = [
     DropdownMenuComponent,
     NotificationComponent,
     SearchBarComponent,
-    NavbarMiddleComponent
+    NavbarMiddleComponent,
+    SeriesListComponent
   ],
   imports: [
     BrowserModule,
