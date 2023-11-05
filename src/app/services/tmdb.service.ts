@@ -58,4 +58,7 @@ export class TmdbService {
     return this.http.get(`${BASE_URL}genre/${contentType}/list?api_key=${API_KEY}`);
   }
 
+  getRelatedMovies(movieId1: number): Observable<any> {
+    return this.http.get(`${BASE_URL}movie/${movieId1}/similar?api_key=${API_KEY}`);
+  }
 }

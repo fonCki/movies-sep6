@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, NavigationEnd} from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { TmdbService } from '../../services/tmdb.service';
-import {filter} from "rxjs/operators";  // Import your TMDB Service
-import { Router } from '@angular/router';
+import { filter } from "rxjs/operators";
 
 @Component({
   selector: 'app-movie-detail',
@@ -10,13 +9,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./movie-details.component.css']
 })
 export class MovieDetailComponent implements OnInit {
-
   movieId: number | null = null;
   movie: any = null;
+  actors: any[] = [];
+  director: any[] = [];
   backgroundImageUrl: string | null = null;
   selectedMediaType: string = 'movie'; // Default to 'movies'
+  relatedMovies: any[] = [];
 
-  constructor(private route: ActivatedRoute, private tmdbService: TmdbService, private router: Router) {
+  constructor(
+    private route: ActivatedRoute,
+    private tmdbService: TmdbService,
+    private router: Router
+  ) {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
@@ -24,23 +29,9 @@ export class MovieDetailComponent implements OnInit {
     });
   }
 
-
-  setMediaTypeFromRoute() {
-    const path = this.router.url.split('?')[0];
-    if (path.includes('/tv')) {
-      this.selectedMediaType = 'tv';
-    } else if (path.includes('/movie')) {
-      this.selectedMediaType = 'movie';
-    }
-
-    console.log('Selected Media Type: ', this.selectedMediaType);
-  }
-
   ngOnInit(): void {
     this.setMediaTypeFromRoute();
-    // Fetch the movie ID from the route
     const id = this.route.snapshot.paramMap.get('id');
-    console.log('Movie ID: ', id);
     this.movieId = id ? +id : null;
 
     if (this.movieId) {
@@ -50,30 +41,52 @@ export class MovieDetailComponent implements OnInit {
     }
   }
 
-actors: any[] = [];
+  setMediaTypeFromRoute(): void {
+    const path = this.router.url.split('?')[0];
+    this.selectedMediaType = path.includes('/tv') ? 'tv' : 'movie';
+    console.log('Selected Media Type: ', this.selectedMediaType);
+  }
 
-fetchMovieDetail(): void {
-  this.tmdbService.getDetails(this.selectedMediaType,this.movieId as number).subscribe(
-    data => {
-      this.movie = data;
-      console.log('Movie Details: ', this.movie);
-      this.fetchMovieCast();
-      this.backgroundImageUrl = 'https://image.tmdb.org/t/p/original' + this.movie.backdrop_path;
-    },
-    error => {
-      console.error('There was an error fetching the movie details!', error);
-    }
-  );
-}
+  fetchMovieDetail(): void {
+    this.tmdbService.getDetails(this.selectedMediaType, this.movieId as number).subscribe(
+      data => {
+        this.movie = data;
+        this.backgroundImageUrl = 'https://image.tmdb.org/t/p/original' + this.movie.backdrop_path;
+        this.fetchMovieCast();
+        this.fetchRelatedMovies();
+      },
+      error => console.error('There was an error fetching the movie details!', error)
+    );
+  }
 
-fetchMovieCast(): void {
-  this.tmdbService.getCast("tv",(this.movieId as number)).subscribe(
-    data => {
-      this.actors = data.cast;
-    },
-    error => {
-      console.error('There was an error fetching the movie cast!', error);
-    }
-  );
-}
+// ...
+
+  fetchMovieCast(): void {
+    this.tmdbService.getCast(this.selectedMediaType as 'tv' | 'movie', this.movieId as number).subscribe(
+      data => {
+        this.director = data.crew.filter((member: any) => member.job === 'Director' || member.job === 'Screenplay');
+        this.actors = data.cast.slice(0, 8); // Take only the first 10 actors
+      },
+      error => {
+        console.error('There was an error fetching the movie cast!', error);
+      }
+    );
+  }
+
+// ...
+
+  fetchRelatedMovies(): void {
+    this.tmdbService.getRelatedMovies(this.movieId as number).subscribe(
+      data => {
+        this.relatedMovies = data.results.slice(0, 16); // Take only the first 5 related movies
+      },
+      error => {
+        console.error('There was an error fetching related movies!', error);
+      }
+    );
+  }
+
+// You would call fetchRelatedMovies() similarly to fetchMovieCast() in your component logic
+
+
 }

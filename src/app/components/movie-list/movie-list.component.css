@@ -168,3 +168,59 @@ featured-title {
   background-color: rgba(109, 109, 110, 0.7);
   color: white;
 }
+
+.rating-stars {
+  display: inline-block;
+  color: #ffc107; /* Star color */
+  white-space: nowrap; /* Prevent stars from wrapping in a new line */
+}
+
+.fa-star,
+.fa-star-half-o,
+.fa-star-o {
+  font-size: 1.2rem; /* Adjust the size of the stars */
+  margin-right: 2px; /* Spacing between stars */
+}
+
+/* ... existing CSS ... */
+
+/* Section title and separator styling */
+.section-title {
+  text-align: center;
+  margin-top: 2em;
+  margin-bottom: 1em;
+}
+
+.separator {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+/* Actors grid */
+.actors-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* Distribute space evenly */
+  gap: 10px; /* Keep a small gap between cards */
+}
+
+.actors-grid .actor-card {
+  flex: 0 1 calc(10% - 10px); /* Adjust the width minus the gap */
+  cursor: pointer; /* Hand pointer on hover */
+  /* ... existing styles ... */
+}
+
+/* Related movies grid */
+.related-movies {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* Distribute space evenly */
+  gap: 10px; /* Keep a small gap between cards */
+}
+
+.related-movies .related-movie-card {
+  flex: 0 1 calc(20% - 10px); /* Adjust the width minus the gap */
+  /* ... existing styles ... */
+}
+

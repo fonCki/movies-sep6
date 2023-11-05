@@ -73,4 +73,16 @@ export class MovieListComponent implements OnInit {
   onResize(event: Event): void {
     // You might want to trigger some functionality on resize events as well
   }
+
+  getStarType(rating: number, starIndex: number): string {
+    const fullStarRating = Math.floor(rating / 2);
+    if (starIndex <= fullStarRating) {
+      return 'fa fa-star'; // Full star class
+    } else if (starIndex === fullStarRating + 1 && rating % 2 >= 0.5) {
+      return 'fa fa-star-half-o'; // Half star class
+    } else {
+      return 'fa fa-star-o'; // Empty star class
+    }
+  }
+
 }
