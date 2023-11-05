@@ -6,8 +6,6 @@ import { SignupComponent } from './components/signup/signup.component';
 import { MovieListComponent } from './components/movie-list/movie-list.component';
 import { MovieDetailComponent } from './components/movie-details/movie-details.component';
 import { ActorDetailsComponent } from './components/actor-details/actor-details.component';
-import {SeriesListComponent} from "./components/series-list/series-list.component";
-
 
 
 const routes: Routes = [
@@ -15,12 +13,11 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'movies', component: MovieListComponent },
+  { path: 'movie', component: MovieListComponent },
   { path: 'movie/:id', component: MovieDetailComponent },
-  { path: 'actors/:id', component: ActorDetailsComponent },
-  { path: 'series', component: MovieListComponent },
-  { path: 'serie/:id', component: MovieDetailComponent },
-  { path: 'actors/:id', component: ActorDetailsComponent },
+  { path: 'tv', component: MovieListComponent },
+  { path: 'tv/:id', component: MovieDetailComponent },
+  { path: 'credits/:id', component: ActorDetailsComponent },
 ];
 
 @NgModule({

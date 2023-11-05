@@ -31,7 +31,6 @@ import { MatBadgeModule } from '@angular/material/badge'; // <-- Import this
 import { MatButtonModule } from '@angular/material/button';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { NavbarMiddleComponent } from './components/navbar-middle/navbar-middle.component';
-import { SeriesListComponent } from './components/series-list/series-list.component';
 import {MatButtonToggleModule} from "@angular/material/button-toggle"; // <-- Make sure this is imported
 
 
@@ -54,8 +53,6 @@ const routes: Routes = [
     NotificationComponent,
     SearchBarComponent,
     NavbarMiddleComponent,
-    SeriesListComponent,
-
   ],
   imports: [
     BrowserModule,

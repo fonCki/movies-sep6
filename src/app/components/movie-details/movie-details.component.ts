@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { TmdbService } from '../../services/tmdb.service';  // Import your TMDB Service
+import {ActivatedRoute, NavigationEnd} from '@angular/router';
+import { TmdbService } from '../../services/tmdb.service';
+import {filter} from "rxjs/operators";  // Import your TMDB Service
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movie-detail',
@@ -11,12 +13,31 @@ export class MovieDetailComponent implements OnInit {
 
   movieId: number | null = null;
   movie: any = null;
-
   backgroundImageUrl: string | null = null;
+  selectedMediaType: string = 'movie'; // Default to 'movies'
 
-  constructor(private route: ActivatedRoute, private tmdbService: TmdbService) { }  // Use TmdbService instead of HttpClient
+  constructor(private route: ActivatedRoute, private tmdbService: TmdbService, private router: Router) {
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      this.setMediaTypeFromRoute();
+    });
+  }
+
+
+  setMediaTypeFromRoute() {
+    const path = this.router.url.split('?')[0];
+    if (path.includes('/tv')) {
+      this.selectedMediaType = 'tv';
+    } else if (path.includes('/movie')) {
+      this.selectedMediaType = 'movie';
+    }
+
+    console.log('Selected Media Type: ', this.selectedMediaType);
+  }
 
   ngOnInit(): void {
+    this.setMediaTypeFromRoute();
     // Fetch the movie ID from the route
     const id = this.route.snapshot.paramMap.get('id');
     console.log('Movie ID: ', id);
@@ -32,8 +53,7 @@ export class MovieDetailComponent implements OnInit {
 actors: any[] = [];
 
 fetchMovieDetail(): void {
-
-  this.tmdbService.getDetails('tv',this.movieId as number).subscribe(
+  this.tmdbService.getDetails(this.selectedMediaType,this.movieId as number).subscribe(
     data => {
       this.movie = data;
       console.log('Movie Details: ', this.movie);

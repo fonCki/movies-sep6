@@ -12,7 +12,7 @@ export class MovieListComponent implements OnInit {
   items: any[] = []; // Renamed to items since it can be movies or series
   private currentPage = 1;
   private isLoading = false;
-  private contentMode: 'tv' | 'movie' = 'movie'; // Default to movies
+  public contentMode: 'tv' | 'movie' = 'movie'; // Default to movies
   private sortby: 'latest' | 'popular' | 'rating' = 'popular'; // Default sort by popular
   private genreId: number | null = null;
 
@@ -24,7 +24,7 @@ export class MovieListComponent implements OnInit {
   ngOnInit(): void {
     // Determine if we are showing movies or series from the route segment
     this.route.url.subscribe(url => {
-      this.contentMode = url[0].path === 'series' ? 'tv' : 'movie'; // Adjust according to your routing
+      this.contentMode = url[0].path.includes('tv') ? 'tv' : 'movie'; // Adjust according to your routing
       this.reloadContent();
     });
 
@@ -54,6 +54,8 @@ export class MovieListComponent implements OnInit {
       data => {
         this.items = [...this.items, ...data.results];
         this.isLoading = false;
+        //console log the first item to see what the data looks like
+        console.log(this.items[0]);
       },
       error => {
         console.error(`Error fetching ${this.contentMode} content:`, error);

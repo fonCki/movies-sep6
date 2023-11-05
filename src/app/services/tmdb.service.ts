@@ -40,13 +40,12 @@ export class TmdbService {
     let endpoint = genre !== null
       ? `${BASE_URL}discover/${contentType}?api_key=${API_KEY}`
       : `${BASE_URL}${contentType}/popular?api_key=${API_KEY}`;
-
     return this.http.get(endpoint, { params });
   }
 
   // A generic method for getting item details, either a movie or a series
-  getDetails(contentType: 'tv' | 'movie', id: number): Observable<any> {
-    return this.http.get(`${BASE_URL}${"contentType"}/${id}?api_key=${API_KEY}`);
+  getDetails(contentType: string, id: number): Observable<any> {
+    return this.http.get(`${BASE_URL}${contentType}/${id}?api_key=${API_KEY}`);
   }
 
   // A generic method for getting the cast, either for movies or series

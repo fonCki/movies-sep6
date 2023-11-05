@@ -1,45 +1,33 @@
-
 <div class="movie-list">
 
-<!-- Featured Movie -->
-<div *ngIf="items && items.length" class="featured-movie-container">
-  <a [routerLink]="['/movie', items[0].id]" class="featured-movie">
-    <div class="featured-movie-background" [style.background-image]="'url(https://image.tmdb.org/t/p/original' + items[0].backdrop_path + ')'">
-      <div class="featured-movie-title">
-        <h1>{{ items[0].title }}</h1>
-        <div class="featured-ranking">number {{ items[0].vote_average }} in the world</div>
-        <div class="featured-description">{{ items[0].overview }}</div>
-        <div class="featured-buttons">
-          <button class="btn btn-play">Play</button>
-          <button class="btn btn-info" [routerLink]="['/movie', items[0].id]">More Info</button>
+  <!-- Featured Movie -->
+  <div *ngIf="items && items.length" class="featured-movie-container">
+    <a [routerLink]="['/' + contentMode, items[0].id]" class="featured-movie">
+      <div class="featured-movie-background"
+           [style.background-image]="'url(https://image.tmdb.org/t/p/original' + items[0].backdrop_path + ')'">
+        <div class="featured-movie-title">
+          <h1>{{ items[0].title ?? items[0].name }}</h1> <!-- Series use name instead of title -->
+          <div class="featured-ranking">number {{ items[0].vote_average }} in the world</div>
+          <div class="featured-description">{{ items[0].overview }}</div>
+          <div class="featured-buttons">
+            <button class="btn btn-play">Play</button>
+            <button class="btn btn-info" [routerLink]="['/' + contentMode, items[0].id]">More Info</button>
+          </div>
         </div>
       </div>
-    </div>
-  </a>
-</div>
+    </a>
+  </div>
 
-<!-- List of movies excluding the first one -->
-<div class="movie-row">
-  <div *ngFor="let movie of items; let i = index" [hidden]="i === 0">
-    <!-- Exclude the first movie from this list -->
-
-    <div class="movie-details-container">
-      <!-- Main movie details section -->
-      <a [routerLink]="['/movie', movie.id]" class="main-details">
-        <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}">
-        <div class="text-details">
-          <h2>{{ movie.title }}</h2> <!-- Use h2 for other movie titles -->
-        </div>
-      </a>
-
-      <!-- Actor's section (hidden for now) -->
-      <section class="actors-grid" *ngIf="movie.actors">
-        <div class="actor-card" *ngFor="let actor of movie.actors">
-          <img [src]="'https://image.tmdb.org/t/p/w200' + actor.profile_path" alt="{{ actor.name }}">
-          <h3>{{ actor.name }}</h3>
-        </div>
-      </section>
+  <!-- List of movies excluding the first one -->
+  <div class="movie-row">
+    <div *ngFor="let movie of items; let i = index" [hidden]="i === 0">
+      <!-- Exclude the first movie from this list -->
+      <div class="movie-details-container">
+        <!-- Main movie details section -->
+        <a [routerLink]="['/' + contentMode, movie.id]" class="main-details">
+          <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}">
+        </a>
+      </div>
     </div>
   </div>
-</div>
 </div>
