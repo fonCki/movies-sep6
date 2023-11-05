@@ -19,43 +19,15 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchGenres();
-    this.fetchMovies();
+
   }
 
   fetchGenres(): void {
     this.tmdbService.getGenres("movie").subscribe({
        next: data => {
          this.genres = data.genres;
-
     }
   }
     );
-  }
-
-  filterMovies(): void {
-    // Call service to fetch movies based on filter criteria
-    console.log('Filtering movies by genre: ', this.selectedGenre, ' and sort by: ', this.selectedSortBy);
-    this.tmdbService.getItems("movie", 1, this.selectedGenre, this.selectedSortBy).subscribe({
-      next: data => {
-        this.movies = data.results || [];
-        console.log('Filtered movies: ', this.movies);
-      },
-      error: error => {
-        console.error('There was an error fetching the filtered movie data!', error);
-      }
-    });
-  }
-
-  fetchMovies(): void {
-    // Use the filterFavorites property somehow when fetching movies...
-    this.tmdbService.getItems().subscribe({
-      next: data => {
-        this.movies = data.results || [];
-      },
-      error: error => {
-        console.error('There was an error fetching the movie data!', error);
-      }
-    });
-
   }
 }

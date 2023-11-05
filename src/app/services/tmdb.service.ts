@@ -28,9 +28,9 @@ export class TmdbService {
       'rating': 'vote_average.desc'
     };
 
-    // If sortBy is not one of the predefined keys, default it to 'popular'
+    // If sortBy is not one of the predefined keys, default it to 'latest'
     if (!sortOptions.hasOwnProperty(sortBy)) {
-      sortBy = 'popular';
+      sortBy = 'latest';
     }
 
     // @ts-ignore
@@ -58,7 +58,7 @@ export class TmdbService {
     return this.http.get(`${BASE_URL}genre/${contentType}/list?api_key=${API_KEY}`);
   }
 
-  getRelatedMovies(movieId1: number): Observable<any> {
-    return this.http.get(`${BASE_URL}movie/${movieId1}/similar?api_key=${API_KEY}`);
+  getRelatedMovies(contentType: 'tv' | 'movie', id: number): Observable<any> {
+    return this.http.get(`${BASE_URL}${contentType}/${id}/similar?api_key=${API_KEY}`);
   }
 }

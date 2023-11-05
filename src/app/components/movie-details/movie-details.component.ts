@@ -33,6 +33,7 @@ export class MovieDetailComponent implements OnInit {
     this.setMediaTypeFromRoute();
     const id = this.route.snapshot.paramMap.get('id');
     this.movieId = id ? +id : null;
+    console.log('Movie ID: ', this.movieId);
 
     if (this.movieId) {
       this.fetchMovieDetail();
@@ -64,7 +65,8 @@ export class MovieDetailComponent implements OnInit {
   fetchMovieCast(): void {
     this.tmdbService.getCast(this.selectedMediaType as 'tv' | 'movie', this.movieId as number).subscribe(
       data => {
-        this.director = data.crew.filter((member: any) => member.job === 'Director' || member.job === 'Screenplay');
+        console.log('Cast: ', data);
+        this.director = data.crew.filter((member: any) => member.job === 'Director');
         this.actors = data.cast.slice(0, 8); // Take only the first 10 actors
       },
       error => {
@@ -76,7 +78,7 @@ export class MovieDetailComponent implements OnInit {
 // ...
 
   fetchRelatedMovies(): void {
-    this.tmdbService.getRelatedMovies(this.movieId as number).subscribe(
+    this.tmdbService.getRelatedMovies(this.selectedMediaType as 'tv' | 'movie', this.movieId as number).subscribe(
       data => {
         this.relatedMovies = data.results.slice(0, 16); // Take only the first 5 related movies
       },
@@ -87,6 +89,5 @@ export class MovieDetailComponent implements OnInit {
   }
 
 // You would call fetchRelatedMovies() similarly to fetchMovieCast() in your component logic
-
 
 }

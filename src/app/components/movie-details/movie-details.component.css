@@ -23,30 +23,33 @@
 }
 
 .main-details {
+  padding: 20px;
   max-width: 800px  ;
   display: flex;
   align-items: flex-start;
-  padding: 20px;
 }
 
 .main-details img {
-  max-width: 300px;
+  height: 80vh;
   margin-right: 20px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.8);
 }
 
 .text-details {
-  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
 }
 
 .text-details p {
+  margin: 10px 0;
+  padding: 0;
   font-size: 18px;
-  margin-bottom: 10px;
   text-align: justify;
 }
 
 .text-details h1 {
-  font-size: 60px;
+  font-size: 40px;
   margin-top: 0;
 }
 
@@ -141,25 +144,25 @@ h2{
 }
 
 /* Additional styles for responsiveness and aesthetics */
-@media (max-width: 768px) {
-  .movie-details-container {
-    padding: 0 20px; /* Smaller lateral margins for smaller screens */
-  }
+/*@media (max-width: 768px) {*/
+/*  .movie-details-container {*/
+/*    padding: 0 20px; !* Smaller lateral margins for smaller screens *!*/
+/*  }*/
 
-  .main-details, .actors-grid, .related-movies {
-    padding: 20px 0; /* Adjusts padding for sections */
-  }
+/*  .main-details, .actors-grid, .related-movies {*/
+/*    padding: 20px 0; !* Adjusts padding for sections *!*/
+/*  }*/
 
-  .main-details img {
-    max-width: 100%;
-    margin-bottom: 20px; /* Stacks the image above the details on small screens */
-  }
+/*  .main-details img {*/
+/*    max-width: 100%;*/
+/*    margin-bottom: 20px; !* Stacks the image above the details on small screens *!*/
+/*  }*/
 
-  .main-details {
-    flex-direction: column;
-    align-items: center;
-  }
-}
+/*  .main-details {*/
+/*    flex-direction: column;*/
+/*    align-items: center;*/
+/*  }*/
+/*}*/
 
 .director {
   display: flex;
