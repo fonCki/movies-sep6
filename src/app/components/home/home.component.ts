@@ -1,7 +1,7 @@
 // home.component.ts
 
 import { Component, OnInit } from '@angular/core';
-import { TmdbService } from '../../services/tmdb.service';  
+import { TmdbService } from '../../services/tmdb.service';
 
 @Component({
   selector: 'app-home',
@@ -23,10 +23,10 @@ export class HomeComponent implements OnInit {
   }
 
   fetchGenres(): void {
-    this.tmdbService.getMovieGenres().subscribe({
+    this.tmdbService.getGenres("movie").subscribe({
        next: data => {
          this.genres = data.genres;
-      
+
     }
   }
     );
@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
   filterMovies(): void {
     // Call service to fetch movies based on filter criteria
     console.log('Filtering movies by genre: ', this.selectedGenre, ' and sort by: ', this.selectedSortBy);
-    this.tmdbService.getFilteredMovies(this.selectedGenre, this.selectedSortBy).subscribe({
+    this.tmdbService.getItems("movie", 1, this.selectedGenre, this.selectedSortBy).subscribe({
       next: data => {
         this.movies = data.results || [];
         console.log('Filtered movies: ', this.movies);
@@ -48,7 +48,7 @@ export class HomeComponent implements OnInit {
 
   fetchMovies(): void {
     // Use the filterFavorites property somehow when fetching movies...
-    this.tmdbService.getPopularMovies().subscribe({
+    this.tmdbService.getItems().subscribe({
       next: data => {
         this.movies = data.results || [];
       },
@@ -56,6 +56,6 @@ export class HomeComponent implements OnInit {
         console.error('There was an error fetching the movie data!', error);
       }
     });
-    
+
   }
 }

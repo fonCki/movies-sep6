@@ -2,16 +2,16 @@
 <div class="movie-list">
 
 <!-- Featured Movie -->
-<div *ngIf="movies && movies.length" class="featured-movie-container">
-  <a [routerLink]="['/movie', movies[0].id]" class="featured-movie">
-    <div class="featured-movie-background" [style.background-image]="'url(https://image.tmdb.org/t/p/original' + movies[0].backdrop_path + ')'">
+<div *ngIf="items && items.length" class="featured-movie-container">
+  <a [routerLink]="['/movie', items[0].id]" class="featured-movie">
+    <div class="featured-movie-background" [style.background-image]="'url(https://image.tmdb.org/t/p/original' + items[0].backdrop_path + ')'">
       <div class="featured-movie-title">
-        <h1>{{ movies[0].title }}</h1>
-        <div class="featured-ranking">number {{ movies[0].vote_average }} in the world</div>
-        <div class="featured-description">{{ movies[0].overview }}</div>
+        <h1>{{ items[0].title }}</h1>
+        <div class="featured-ranking">number {{ items[0].vote_average }} in the world</div>
+        <div class="featured-description">{{ items[0].overview }}</div>
         <div class="featured-buttons">
           <button class="btn btn-play">Play</button>
-          <button class="btn btn-info" [routerLink]="['/movie', movies[0].id]">More Info</button>
+          <button class="btn btn-info" [routerLink]="['/movie', items[0].id]">More Info</button>
         </div>
       </div>
     </div>
@@ -20,7 +20,7 @@
 
 <!-- List of movies excluding the first one -->
 <div class="movie-row">
-  <div *ngFor="let movie of movies; let i = index" [hidden]="i === 0">
+  <div *ngFor="let movie of items; let i = index" [hidden]="i === 0">
     <!-- Exclude the first movie from this list -->
 
     <div class="movie-details-container">

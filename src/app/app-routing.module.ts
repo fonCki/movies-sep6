@@ -18,10 +18,9 @@ const routes: Routes = [
   { path: 'movies', component: MovieListComponent },
   { path: 'movie/:id', component: MovieDetailComponent },
   { path: 'actors/:id', component: ActorDetailsComponent },
-  //series
-  { path: 'series', component: SeriesListComponent },
-  { path: 'serie/:id', component: SeriesListComponent },
-  { path: 'actors/:id', component: SeriesListComponent },
+  { path: 'series', component: MovieListComponent },
+  { path: 'serie/:id', component: MovieDetailComponent },
+  { path: 'actors/:id', component: ActorDetailsComponent },
 ];
 
 @NgModule({

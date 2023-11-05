@@ -33,7 +33,7 @@ actors: any[] = [];
 
 fetchMovieDetail(): void {
 
-  this.tmdbService.getMovieDetails(this.movieId as number).subscribe(
+  this.tmdbService.getDetails('tv',this.movieId as number).subscribe(
     data => {
       this.movie = data;
       console.log('Movie Details: ', this.movie);
@@ -47,7 +47,7 @@ fetchMovieDetail(): void {
 }
 
 fetchMovieCast(): void {
-  this.tmdbService.getMovieCast(this.movieId as number).subscribe(
+  this.tmdbService.getCast("tv",(this.movieId as number)).subscribe(
     data => {
       this.actors = data.cast;
     },

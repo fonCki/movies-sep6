@@ -24,14 +24,15 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatDividerModule} from "@angular/material/divider";
 import { NotificationComponent } from './components/notification/notification.component';
-
-
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
 
 import { MatBadgeModule } from '@angular/material/badge'; // <-- Import this
 import { MatButtonModule } from '@angular/material/button';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { NavbarMiddleComponent } from './components/navbar-middle/navbar-middle.component';
-import { SeriesListComponent } from './components/series-list/series-list.component'; // <-- Make sure this is imported
+import { SeriesListComponent } from './components/series-list/series-list.component';
+import {MatButtonToggleModule} from "@angular/material/button-toggle"; // <-- Make sure this is imported
 
 
 const routes: Routes = [
@@ -53,7 +54,8 @@ const routes: Routes = [
     NotificationComponent,
     SearchBarComponent,
     NavbarMiddleComponent,
-    SeriesListComponent
+    SeriesListComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -70,6 +72,9 @@ const routes: Routes = [
     MatBadgeModule,
     MatButtonModule,
     MatSlideToggleModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatButtonToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]
