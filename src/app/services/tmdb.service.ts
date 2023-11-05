@@ -61,4 +61,9 @@ export class TmdbService {
   getRelatedMovies(contentType: 'tv' | 'movie', id: number): Observable<any> {
     return this.http.get(`${BASE_URL}${contentType}/${id}/similar?api_key=${API_KEY}`);
   }
+
+  search(query: string, type: 'movie' | 'tv' | 'person' = 'movie'): Observable<any> {
+    let params = new HttpParams().set('query', query);
+    return this.http.get(`${BASE_URL}search/${type}?api_key=${API_KEY}`, { params });
+  }
 }

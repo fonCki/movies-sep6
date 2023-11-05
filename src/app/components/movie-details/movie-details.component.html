@@ -1,6 +1,7 @@
-<div class="container">
 
-  <div class="movie-details-container" *ngIf="movie">
+<router-outlet>
+<div class="container">
+<div class="movie-details-container" *ngIf="movie">
     <div class="background-test" [ngStyle]="{'background-image': 'url(' + backgroundImageUrl + ')'}"></div>
     <div class="padding-container">
       <section class="main-details">
@@ -8,9 +9,10 @@
         <div class="text-details">
           <h1>{{ movie.title ?? movie.name}}</h1>
           <p>{{ movie.overview }}</p>
-          <p><strong>Director</strong> {{ movie.director }}</p>
+          <div *ngIf="director && director.length && director[0].profile_path !== null">
+            <p><strong>Director</strong> {{ movie.director }}</p>
+          </div>
           <div class="director" *ngIf="director && director.length && director[0].profile_path !== null ">
-
             <div class="actor-card" *ngFor="let dir of director | slice:0:8">
               <!-- Only show image if dir.profile_path exists -->
               <img *ngIf="dir.profile_path" [src]="'https://image.tmdb.org/t/p/w200' + dir.profile_path" alt="{{ dir.name }}">
@@ -46,7 +48,7 @@
           <!-- Only show related movie card if relatedMovie.poster_path exists -->
           <div class="related-movie-card" *ngIf="relatedMovie.poster_path">
             <a [routerLink]="['/' + selectedMediaType, relatedMovie.id]">
-              <img [src]="'https://image.tmdb.org/t/p/w200' + relatedMovie.poster_path" alt="{{ relatedMovie.title }}">
+              <img [src]="'https://image.tmdb.org/t/p/w200' + relatedMovie.poster_path"  routerLinkActive="active" alt="{{ relatedMovie.title }}">
             </a>
           </div>
         </div>
@@ -54,3 +56,4 @@
     </div>
   </div>
 </div>
+</router-outlet>

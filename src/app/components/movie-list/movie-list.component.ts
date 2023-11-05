@@ -1,6 +1,7 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TmdbService } from '../../services/tmdb.service';
+import { NavbarService } from '../../services/navbar.service';
 
 @Component({
   selector: 'app-movie-list',
@@ -18,7 +19,8 @@ export class MovieListComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private tmdbService: TmdbService
+    private tmdbService: TmdbService,
+    private navbarService: NavbarService
   ) {}
 
   ngOnInit(): void {
@@ -26,6 +28,15 @@ export class MovieListComponent implements OnInit {
     this.route.url.subscribe(url => {
       this.contentMode = url[0].path.includes('tv') ? 'tv' : 'movie'; // Adjust according to your routing
       this.reloadContent();
+      // Subscribe to search results
+      this.navbarService.searchResults.subscribe(results => {
+        console.log('Search results:', results);
+        // Handle the search results
+        // empty the items array
+        this.items = [];
+        this.items = results;
+      });
+
     });
 
     this.route.queryParams.subscribe(params => {
