@@ -1,8 +1,7 @@
-
 <router-outlet>
 <div class="container">
 <div class="movie-details-container" *ngIf="movie">
-    <div class="background-test" [ngStyle]="{'background-image': 'url(' + backgroundImageUrl + ')'}"></div>
+  <div class="background-test" [ngStyle]="{'background-image': 'url(' + (backgroundImageUrl ? backgroundImageUrl : 'assets/images/default-background.jpg') + ')'}"></div>
     <div class="padding-container">
       <section class="main-details">
         <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}">
@@ -57,3 +56,4 @@
   </div>
 </div>
 </router-outlet>
+
