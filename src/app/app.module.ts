@@ -13,8 +13,8 @@ import { ActorDetailsComponent } from './components/actor-details/actor-details.
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { getAuth, provideAuth } from '@angular/fire/auth';
 import { environment } from '../environments/environments';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
@@ -32,6 +32,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { NavbarMiddleComponent } from './components/navbar-middle/navbar-middle.component';
 import {MatButtonToggleModule} from "@angular/material/button-toggle"; // <-- Make sure this is imported
+
 
 
 const routes: Routes = [
@@ -56,8 +57,8 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAuthModule,
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    provideAuth(() => getAuth()),
     HttpClientModule,
     AppRoutingModule,
     FormsModule,

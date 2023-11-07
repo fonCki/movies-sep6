@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import firebase from 'firebase/compat/app';
-import { UserService } from './user.service'; // Import UserService
+import { Auth, authState, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile } from '@angular/fire/auth';
+import { User } from 'firebase/auth';
 import { BehaviorSubject } from 'rxjs';
 
 
@@ -11,24 +10,25 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AuthService {
 
-  private currentUserSubject = new BehaviorSubject<firebase.User | null>(null);
+  private currentUserSubject = new BehaviorSubject<User | null>(null);
   public user = this.currentUserSubject.asObservable();
 
   constructor(
-    private afAuth: AngularFireAuth, 
-    private userService: UserService,  // Inject UserService
+    private auth: Auth, // Use Auth from @angular/fire/auth
 
-  ) {     
-    this.afAuth.authState.subscribe(user => {
-    this.currentUserSubject.next(user);});
+  ) {
+    authState(this.auth).subscribe(user => {
+      this.currentUserSubject.next(user);
+    });
   }
 
-  getCurrentUser(): firebase.User | null {
-    return this.currentUserSubject.value;
+  getCurrentUser(): User | null {
+    return this.auth.currentUser;
   }
 
   async signInWithGoogle() {
-    const credential = await this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    const provider = new GoogleAuthProvider();
+    const credential = await signInWithPopup(this.auth, provider);
     if (credential.user) { // Check if user is non-null
       console.log("user created");
       console.log(credential.user);
@@ -36,74 +36,62 @@ export class AuthService {
     }
     return credential;
   }
-  
+
   async signInWithFacebook() {
-    const credential = await this.afAuth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
-    return credential;
+    // const credential = await this.afAuth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
+    // return credential;
   }
-  
+
   async signInWithTwitter() {
-    const credential = await this.afAuth.signInWithPopup(new firebase.auth.TwitterAuthProvider());
-    return credential;
+    // const credential = await this.afAuth.signInWithPopup(new firebase.auth.TwitterAuthProvider());
+    // return credential;
   }
 
   async signInWithGithub() {
-    const credential = await this.afAuth.signInWithPopup(new firebase.auth.GithubAuthProvider());
-    return credential;
+    // const credential = await this.afAuth.signInWithPopup(new firebase.auth.GithubAuthProvider());
+    // return credential;
   }
 
   async signInWithLinkedIn() {
-    const credential = await this.afAuth.signInWithPopup(new firebase.auth.OAuthProvider('linkedin.com'));
-    return credential;
+    // const credential = await this.afAuth.signInWithPopup(new firebase.auth.OAuthProvider('linkedin.com'));
+    // return credential;
   }
-  
+
 
   //create user with email, password, name, and photo
   async signUpWithEmail(email: string, password: string, name: string, lastName: string) {
-    const credential = await this.afAuth.createUserWithEmailAndPassword(email, password).then(() => {
-       this.updateProfile(name + " " + lastName);
-    });
+    const credential = await createUserWithEmailAndPassword(this.auth, email, password);
+    await this.updateProfile(name + " " + lastName);
     return credential;
   }
-  
+
 
   async loginWithEmail(email: string, password: string) {
-    const credential = await this.afAuth.signInWithEmailAndPassword(email, password);
+    const credential = await signInWithEmailAndPassword(this.auth, email, password);
+    return credential;
   }
 
 
-  async getUser() {
-    return this.afAuth.currentUser;
-  }
-
-  signOut(): void {
+  async signOut(): Promise<void> {
     console.log('signing out');
-    this.afAuth.signOut();
+    return await signOut(this.auth);
   }
-  
+
 
   async isLogged() {
-    return this.afAuth.authState;
+    return this.auth.currentUser;
   }
 
 
   async updateProfile(displayName: string) {
-    const profile = {
+    const user = this.auth.currentUser;
+    if (user) {
+      await updateProfile(user, {
         displayName: displayName,
-        uid: 1111
-        
+        // ... other profile updates
+      });
+      // ... rest of the code
     }
-    const currentUser = await this.afAuth.currentUser;
-        if (currentUser) {
-          return currentUser.updateProfile(profile).then(() => {
-            console.log('User profile updated successfully');
-            console.log(currentUser);
-          }
-          ).catch(error => {
-            console.log(error);
-          }
-          );
-        }
-      }
+  }
 
 }
