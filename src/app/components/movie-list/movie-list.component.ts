@@ -26,7 +26,12 @@ export class MovieListComponent implements OnInit {
   ngOnInit(): void {
     // Determine if we are showing movies or series from the route segment
     this.route.url.subscribe(url => {
-      this.contentMode = url[0].path.includes('tv') ? 'tv' : 'movie'; // Adjust according to your routing
+      if (url && url.length > 0) {
+        this.contentMode = url[0].path.includes('tv') ? 'tv' : 'movie';
+      } else {
+        // Handle the case where url is not as expected
+        console.log('URL is not as expected!')
+      }
       this.reloadContent();
       // Subscribe to search results
       this.navbarService.searchResults.subscribe(results => {
@@ -65,8 +70,6 @@ export class MovieListComponent implements OnInit {
       data => {
         this.items = [...this.items, ...data.results];
         this.isLoading = false;
-        //console log the first item to see what the data looks like
-        console.log(this.items[0]);
       },
       error => {
         console.error(`Error fetching ${this.contentMode} content:`, error);
