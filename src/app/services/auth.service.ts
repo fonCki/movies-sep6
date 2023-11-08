@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Auth, authState, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile } from '@angular/fire/auth';
 import { User } from 'firebase/auth';
 import { BehaviorSubject } from 'rxjs';
+import { FacebookAuthProvider } from '@angular/fire/auth';
 
 
 
@@ -38,8 +39,11 @@ export class AuthService {
   }
 
   async signInWithFacebook() {
-    // const credential = await this.afAuth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
-    // return credential;
+    const provider = new FacebookAuthProvider();
+    const credential = await signInWithPopup(this.auth, provider);
+    // Process the credential & user
+    console.log(credential.user);
+    return credential;
   }
 
   async signInWithTwitter() {
