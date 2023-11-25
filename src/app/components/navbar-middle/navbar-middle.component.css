@@ -76,3 +76,18 @@ mat-button-toggle-checked {
 ::ng-deep .cdk-overlay-pane {
   max-height: 350px !important;
 }
+
+@media (max-width: 768px) {
+  .nav-categories {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .nav-category-group,
+  .nav-category-dropdown {
+    width: 100%;
+  }
+  .nav-category, .genre-dropdown-button {
+    padding: 5px 10px; /* Smaller padding */
+    font-size: 14px; /* Smaller font size */
+  }
+}
