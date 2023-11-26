@@ -11,6 +11,9 @@
 }
 
 .background-test {
+  background-image: url("/assets/images/default-background.jpg");
+  background-size: cover;
+  background-position: center;
   position: absolute;
   top: 0;
   left: 0;

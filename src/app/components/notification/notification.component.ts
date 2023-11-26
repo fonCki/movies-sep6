@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { WebSocketService } from '../../services/web-socket.service';
+//import { WebSocketService } from '../../services/web-socket.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -15,11 +15,11 @@ export class NotificationComponent implements OnInit, OnDestroy {
   ];
   private notificationsSubscription: Subscription | undefined;
 
-  constructor(private webSocketService: WebSocketService) {}
+  constructor(/*private webSocketService: WebSocketService*/) {}
 
   ngOnInit(): void {
     // THIS IS A TEST TO IMPLEMENT THE NOTIFICATION, TROUGH SOCKET.IO
-
+    /*
      this.notificationsSubscription = this.webSocketService.notifications$.subscribe((notification: any) => {
       // Log the received notification for debugging
       console.log('Notification received:', notification);
@@ -48,7 +48,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
       }
     });
 
-
+     */
   }
 
 
@@ -57,7 +57,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
     if (notification) {
       notification.isNew = false;
       // Just call the service method to emit the 'markAsRead' event
-      this.webSocketService.markAsRead(notificationId);
+     // this.webSocketService.markAsRead(notificationId);
     }
   }
 
@@ -66,7 +66,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-     this.notificationsSubscription?.unsubscribe();
-     this.webSocketService.disconnect();
+    // this.notificationsSubscription?.unsubscribe();
+    // this.webSocketService.disconnect();
   }
 }

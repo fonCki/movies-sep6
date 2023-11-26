@@ -33,7 +33,7 @@
 }
 
 .nav-category:hover,
-.genre-dropdown-button:hover
+.genre-dropdown-button:hover,
 .mat-button-toggle:hover {
   color: #e50914; /* Netflix red for hover state */
   background-color: #2c2c2c; /* Slightly lighter background for items on hover */
